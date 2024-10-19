@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker front end image
-        id: push
+        id: pushfront
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
@@ -37,7 +37,7 @@ jobs:
           tags: ltcDevOps/frontend:latest
           
       - name: Build and push Docker api image
-        id: push
+        id: pushapi
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
