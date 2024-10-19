@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './App.module.css';
 
-const TestWorkflow = true
-
 const API_BASE_URL = 'http://localhost:8000/api';
 
 const TvShowList = ({ onSelectShow }) => {
