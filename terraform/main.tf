@@ -1,32 +1,5 @@
 
 
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~>4.6.0"
-    }
-  }
-
-}
-
-provider "azurerm" {
-  features {}
-}
-
-# Configure the Kubernetes provider
-provider "kubernetes" {
-  host                   = azurerm_kubernetes_cluster.k8s.kube_config.0.host
-  client_certificate     = base64decode(azurerm_kubernetes_cluster.k8s.kube_config.0.client_certificate)
-  client_key             = base64decode(azurerm_kubernetes_cluster.k8s.kube_config.0.client_key)
-  cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.k8s.kube_config.0.cluster_ca_certificate)
-}
-
-resource "azurerm_resource_group" "ltcDevOps" {
-  name     = "ltcDevOpsRG"
-  location = "northeurope"
-}
-
 resource "azurerm_kubernetes_cluster" "k8s" {
     location = azurerm_resource_group.ltcDevOps.location
     name = "K8S_cluster_ltc"
@@ -43,6 +16,28 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     type = "SystemAssigned"
   }
   
+}
+
+
+variable "cosmosdb_key" {
+  description = "CosmosDB key"
+  type        = string
+}
+
+variable "cosmosdb_endpoint" {
+  description = "cosmosdb_endpoint"
+  type        = string
+}
+
+resource "kubernetes_secret" "cosmosdb_crendentials" {
+  metadata {
+    name = "cosmosdb-credentials"
+  }
+
+  data = {
+    COSMOSDB_KEY = var.cosmosdb_key
+    COSMODBDB_ENDPOINT = var.cosmosdb_endpoint
+  }
 }
 
 resource "kubernetes_deployment" "ltc_API"{
@@ -71,6 +66,27 @@ resource "kubernetes_deployment" "ltc_API"{
           name = "ltcapi"
           port {
             container_port = 8000
+          }
+
+
+          env {
+            name = "CosmosDBKey"
+            value_from {
+              secret_key_ref {
+                key = "COSMOSDB_KEY"
+                name = kubernetes_secret.cosmosdb_crendentials.metadata[0].name
+              }
+            }
+          }
+
+          env {
+            name = "CosmosDBEndpoint"
+            value_from {
+              secret_key_ref {
+                key = "COSMODBDB_ENDPOINT"
+                name = kubernetes_secret.cosmosdb_crendentials.metadata[0].name
+              }
+            }
           }
         }
       }

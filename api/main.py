@@ -25,7 +25,7 @@ endpoint = os.getenv("CosmosDBEndpoint")
 key = os.getenv("CosmosDBKey")
 
 if not endpoint or not key:
-    raise ValueError("CosmosDBEndpoint and CosmosDBKey must be set in the .env file")
+    raise ValueError("CosmosDBEndpoint and CosmosDBKey env var must be set")
 
 client = CosmosClient(endpoint, key)
 
