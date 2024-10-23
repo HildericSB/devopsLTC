@@ -18,5 +18,9 @@ output "host" {
 
 # Output the web server's public IP
 output "web_server_ip" {
+  value = kubernetes_service.ltc_frontend.status.0.load_balancer.0.ingress.0.ip
+}
+
+output "ltc_API_ip" {
   value = kubernetes_service.ltc_API.status.0.load_balancer.0.ingress.0.ip
 }

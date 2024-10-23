@@ -17,18 +17,6 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
   
 }
-
-
-variable "cosmosdb_key" {
-  description = "CosmosDB key"
-  type        = string
-}
-
-variable "cosmosdb_endpoint" {
-  description = "cosmosdb_endpoint"
-  type        = string
-}
-
 resource "kubernetes_secret" "cosmosdb_crendentials" {
   metadata {
     name = "cosmosdb-credentials"
@@ -38,6 +26,60 @@ resource "kubernetes_secret" "cosmosdb_crendentials" {
     COSMOSDB_KEY = var.cosmosdb_key
     COSMODBDB_ENDPOINT = var.cosmosdb_endpoint
   }
+}
+
+resource "kubernetes_deployment" "ltc_frontend"{
+  metadata {
+    name = "frontend"
+  }
+
+  spec {
+    replicas = 1
+    selector {
+      match_labels = {
+        app = "frontend"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "frontend"
+        }
+      }
+
+      spec {
+        container{
+          image = "hilderoc/ltcfront:latest"
+          name = "ltcfrontend"
+          port{
+            container_port = 3000
+          }
+        }
+
+      }
+    }
+  }
+}
+
+resource "kubernetes_service" "ltc_frontend" {
+  metadata {
+    name = "frontend"
+  }
+
+  spec {
+    selector = {
+      app = "frontend"
+    }
+
+    port {
+      port = 3000
+      target_port = 3000
+    }
+
+    type = "LoadBalancer"
+  }
+
 }
 
 resource "kubernetes_deployment" "ltc_API"{
