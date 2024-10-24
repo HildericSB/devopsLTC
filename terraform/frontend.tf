@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "ltc_frontend"{
           }
 
           env{
-            name = "API_URL"
+            name = "REACT_APP_API_URL"
             value = "http://api:8000"
           }
         }
