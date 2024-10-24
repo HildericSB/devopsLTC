@@ -1,5 +1,6 @@
 # FRONT END APP DEPLOYEMENT
 resource "kubernetes_deployment" "ltc_frontend"{
+  depends_on = [ kubernetes.kubernetes_deployment.ltc_API ]
   metadata {
     name = "frontend"
   }
@@ -29,7 +30,7 @@ resource "kubernetes_deployment" "ltc_frontend"{
 
           env{
             name = "REACT_APP_API_URL"
-            value = "http://api:8000"
+            value = "http://${kubernetes_service.ltc_API_external.status.0.load_balancer.0.ingress[0].ip}:8000"
           }
         }
 
