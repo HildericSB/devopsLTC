@@ -69,7 +69,7 @@ resource "kubernetes_deployment" "ltc_API"{
 
 resource "kubernetes_service" "ltc_API_external" {
   metadata {
-    name = "api_external"  
+    name = "api-external"  
   }
 
   spec {
