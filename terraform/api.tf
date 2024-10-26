@@ -15,7 +15,7 @@ resource "kubernetes_secret" "cosmosdb_crendentials" {
 # API DEPLOYEMENT
 resource "kubernetes_deployment" "ltc_API"{
   metadata {
-    name = "web-server"
+    name = "ltc-api"
   }
 
   spec {
@@ -40,7 +40,6 @@ resource "kubernetes_deployment" "ltc_API"{
           port {
             container_port = 8000
           }
-
 
           env {
             name = "CosmosDBKey"

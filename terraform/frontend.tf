@@ -1,6 +1,6 @@
 # FRONT END APP DEPLOYEMENT
 resource "kubernetes_deployment" "ltc_frontend"{
-  depends_on = [ kubernetes.kubernetes_deployment.ltc_API ]
+  depends_on = [ kubernetes_deployment.ltc_API ]
   metadata {
     name = "frontend"
   }
