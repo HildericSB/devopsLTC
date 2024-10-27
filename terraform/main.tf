@@ -17,7 +17,18 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   identity {
     type = "SystemAssigned"
   }
+
+  # AKS cluster monitoring addon
+  oms_agent {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.LtcAnalyticWorkspace.id
+  }
   
 }
+
+resource "azurerm_resource_group" "ltcDevOps" {
+  name     = "ltcDevOpsRG"
+  location = "northeurope"
+}
+
 
 
