@@ -2,3 +2,5 @@ fastapi
 azure-cosmos 
 uvicorn
 python-dotenv
+prometheus_fastapi_instrumentator
+prometheus-client
