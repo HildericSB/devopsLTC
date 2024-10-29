@@ -1,10 +1,12 @@
 
 grafana:
   service:
-    type: "LoadBalancer"
+    # Change this to LoadBalancer to make it accesible and uncomment outputs
+    type: "ClusterIP"
 
 prometheus:
   service:
+    # Change this to LoadBalancer to make it accesible and uncomment outputs
     type: "ClusterIP"
   additionalServiceMonitors:
     - name: "ltc-api-monitor"

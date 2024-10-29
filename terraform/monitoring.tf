@@ -38,18 +38,6 @@ resource "helm_release" "prometheus"{
     chart = "kube-prometheus-stack"
     namespace = kubernetes_namespace.monitoring.metadata.0.name
     version = "65.5.0"
-/* 
-    # Load balancer to make it accsesible from outside
-    set{
-        name = "prometheus.service.type"
-        value = "LoadBalancer"
-    }
-
-    # Makes Grafana accessible externally
-    set {
-        name  = "grafana.service.type"
-        value = "LoadBalancer"  
-    } */
 
   values = [
     file("${path.module}/prometheus-values.yaml")
