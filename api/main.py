@@ -18,6 +18,10 @@ COSMOS_QUERY_TIME = prometheus_client.Histogram(
 load_dotenv()
 
 app = FastAPI()
+
+# Initialize and add Prometheus instrumentation
+Instrumentator().instrument(app).expose(app)
+
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
