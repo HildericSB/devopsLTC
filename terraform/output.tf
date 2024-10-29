@@ -24,3 +24,29 @@ output "web_server_ip" {
 output "ltc_API_ip" {
   value = kubernetes_service.ltc_API_external.status.0.load_balancer.0.ingress.0.ip
 }
+
+/* # OUTPUT PROMETHEUS INSTALL
+data "kubernetes_service" "prometheus"{
+  metadata {
+    name = "prometheus-kube-prometheus"
+    namespace = kubernetes_namespace.monitoring.metadata.0.name
+  }
+  depends_on = [ helm_release.prometheus ]
+}
+
+data "kubernetes_service" "grafana"{
+  metadata {
+    name = "prometheus-grafana"
+    namespace = kubernetes_namespace.monitoring.metadata.0.name
+  }
+  depends_on = [ helm_release.prometheus ]
+}
+
+
+output "grafana_ip"{
+  value = data.kubernetes_service.grafana.status.0.load_balancer.0.ingress.0.ip
+}
+
+output "prometheus"{
+  value = data.kubernetes_service.prometheus.status.0.load_balancer.0.ingress.0.ip
+} */

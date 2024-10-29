@@ -1,0 +1,20 @@
+
+grafana:
+  service:
+    type: "LoadBalancer"
+
+prometheus:
+  service:
+    type: "ClusterIP"
+  additionalServiceMonitors:
+    - name: "ltc-api-monitor"
+      selector:
+        matchLabels:
+          app: "ltcapi"
+      namespaceSelector:
+        matchNames:
+          - default
+      endpoints:
+      - port: "8000"
+        path: "/metrics"
+        interval: "15s"
