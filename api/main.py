@@ -4,23 +4,12 @@ from azure.cosmos import CosmosClient
 from dotenv import load_dotenv
 import os
 from typing import Optional
-from prometheus_fastapi_instrumentator import Instrumentator
-import prometheus_client
-
-# Create custom metrics
-COSMOS_QUERY_TIME = prometheus_client.Histogram(
-    name='cosmos_query_duration_seconds',
-    documentation='Time spent processing Cosmos DB queries',
-    labelnames=['endpoint']
-)
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = FastAPI()
 
-# Initialize and add Prometheus instrumentation
-Instrumentator().instrument(app).expose(app)
 
 # Enable CORS
 app.add_middleware(
@@ -49,7 +38,6 @@ async def root():
     return {"message": "Welcome to the TV Shows API!"}
 
 @app.get("/api/shows")
-@COSMOS_QUERY_TIME.labels(endpoint='/api/shows').time()
 async def get_tv_shows():
     try:
         query = "SELECT c.id, c.title FROM c"
@@ -59,7 +47,6 @@ async def get_tv_shows():
         raise HTTPException(status_code=500, detail="Error accessing Cosmos DB")
 
 @app.get("/api/seasons")
-@COSMOS_QUERY_TIME.labels(endpoint='/api/seasons').time()
 async def get_seasons(show_id: Optional[str] = Query(None, title="Show ID")):
     if not show_id:
         raise HTTPException(status_code=400, detail="Please provide a show_id query parameter. If unaware of the showId, check out the /api/shows endpoint.")
