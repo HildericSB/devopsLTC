@@ -89,6 +89,9 @@ resource "kubernetes_service" "ltc_API_external" {
 resource "kubernetes_service" "ltc_API_internal" {
   metadata {
     name = "api" # This name is used for internal DNS resolution, used in frontend tf !
+    labels = {
+      app = "ltcapi"  # Add this label to match ServiceMonitor
+    }
   }
 
   spec {
