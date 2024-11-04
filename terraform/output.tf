@@ -25,7 +25,7 @@ output "ltc_API_ip" {
   value = kubernetes_service.ltc_API_external.status.0.load_balancer.0.ingress.0.ip
 }
 
-/* # OUTPUT PROMETHEUS INSTALL
+/* # OUTPUT PROMETHEUS. !!!! NOT TESTED !!!!
 data "kubernetes_service" "prometheus"{
   metadata {
     name = "prometheus-kube-prometheus"

@@ -1,14 +1,13 @@
 # LTC DevOps Project
 
 This is the sample application for the DevOps Capstone Project on [Learn to Cloud.](https://learntocloud.guide)
-It shows your favorite TV Shows or movies, the front-end is in React and the API is written in Python using FastAPI.
 
 ## Application
 
 **Front-End** - A web application where users can view.
 ![React Frontend application](./images/react-frontend.png)
 
-**API**: API that receives request to fetch TV Shows or Movies data, stored in NoSQL Database. For this sample app I am using CosmosDB from Azure. But you can modify the code according to your provider within the API.
+**API**: API that receives request to fetch TV Shows or Movies data, stored in NoSQL Database.
 ![API for TV Shows](./images/api-tvshows.png)
 
 ## Running locally
@@ -25,6 +24,13 @@ The API code exists in the `api` directory. You can run the API server locally:
 - Also, change the API code depending on the data stored in your NoSQL Database in `main.py` accordingly
 - Run the API server: `uvicorn main:app --reload`
 - Your API Server should be running on port `http://localhost:8000`
+
+### DB
+
+The DB is a Azure CosmoDB.
+Create one using COSMODB interface and identification informations in a .env file in the api folder
+CosmosDBEndpoint="your endpoint"
+CosmosDBKey="your cosmos db key"
 
 ### Front-end
 
@@ -46,12 +52,14 @@ The goal is to get hands-on with DevOps practices like Containerization, CICD an
 - Kubernetes: Create deployments for both of your containers using YAML files, and deploy it to your cluster.
 - Monitoring: Setup monitoring for your cluster, look into Prometheus and Grafana.
 
-Look at the [Phase 4 capstone project](https://learntocloud.guide/phase4/) for more details.
+### Azure deployment
+Install azure CLI on your platform
+First you will probably have to login `az login --tenant TENANT ID`
+To deploy the infrastructure on azure, simply use `terraform init` and `terraform deploy`
+To access the K8 cluster first use : `az aks get-credentials --resource-group ltcDevOpsRG --name K8S_cluster_ltc` to get credentials
 
-## Author
 
-[Rishab Kumar](https://github.com/rishabkumar7)
+## Monitoring
 
-## License
-
-[MIT](./LICENSE)
+To access prometheus and grafana, because they are using only a Cluster IP, use a `kubectl port forward` for access.
+It's possible the use public IP but it's not tested (bcs of azure free tier 3 publics IPs limit)
