@@ -1,0 +1,56 @@
+[
+    {
+        "title": "Inception",
+        "releaseYear": "2010",
+        "genre": "Science Fiction, Action",
+        "coverUrl": "https://example.com/inception.jpg",
+        "id": "c961ea4c-118b-4857-9401-ea6aee47554f",
+        "_rid": "5UsHANrK5q0BAAAAAAAAAA==",
+        "_self": "dbs/5UsHAA==/colls/5UsHANrK5q0=/docs/5UsHANrK5q0BAAAAAAAAAA==/",
+        "_etag": "\"1b00d86f-0000-0300-0000-671267130000\"",
+        "_attachments": "attachments/",
+        "_ts": 1729259283
+    },
+    {
+        "title": "The Shawshank Redemption",
+        "releaseYear": "1994",
+        "genre": "Drama, Crime",
+        "coverUrl": "https://example.com/shawshank-redemption.jpg",
+        "id": "d09ba281-9d6f-45f1-8bd8-0d946509c8fe",
+        "_rid": "5UsHANrK5q0CAAAAAAAAAA==",
+        "_self": "dbs/5UsHAA==/colls/5UsHANrK5q0=/docs/5UsHANrK5q0CAAAAAAAAAA==/",
+        "_etag": "\"1b00d96f-0000-0300-0000-671267130000\"",
+        "_attachments": "attachments/",
+        "_ts": 1729259283
+    },
+    {
+        "title": "The Dark Knight",
+        "releaseYear": "2008",
+        "genre": "Action, Crime, Drama",
+        "coverUrl": "https://example.com/dark-knight.jpg",
+        "id": "8c9f8dd7-dafe-4fb1-887a-8349ed1edce9",
+        "_rid": "5UsHANrK5q0DAAAAAAAAAA==",
+        "_self": "dbs/5UsHAA==/colls/5UsHANrK5q0=/docs/5UsHANrK5q0DAAAAAAAAAA==/",
+        "_etag": "\"1b00da6f-0000-0300-0000-671267130000\"",
+        "_attachments": "attachments/",
+        "_ts": 1729259283
+    },
+    {
+        "id": "81e93ca5-5d62-4a25-97b9-ac165f8c9643",
+        "tvshows": "replace_with_new_partition_key_value",
+        "title": "The leftovers",
+        "seasons": [
+            {
+                "season": 1,
+                "episode": 1,
+                "title": "Pilot",
+                "description": "Trois ans après la disparition de 2 % de la population mondiale, le policier Kevin Garvey doit gérer différents soucis dont l’interruption des commémorations par un groupe considéré comme une secte."
+            }
+        ],
+        "_rid": "5UsHANrK5q0FAAAAAAAAAA==",
+        "_self": "dbs/5UsHAA==/colls/5UsHANrK5q0=/docs/5UsHANrK5q0FAAAAAAAAAA==/",
+        "_etag": "\"5b00a345-0000-0300-0000-6728ec670000\"",
+        "_attachments": "attachments/",
+        "_ts": 1730735207
+    }
+]
