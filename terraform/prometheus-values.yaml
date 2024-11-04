@@ -17,6 +17,6 @@ prometheus:
         matchNames:
           - default
       endpoints:
-      - port: "8000"
+      - port: "ltcapi"
         path: "/metrics"
         interval: "15s"

@@ -38,6 +38,7 @@ resource "kubernetes_deployment" "ltc_API"{
           image = "hilderoc/ltcapi:latest"
           name = "ltcapi"
           port {
+            name = "ltcapi"
             container_port = 8000
           }
 
@@ -100,11 +101,10 @@ resource "kubernetes_service" "ltc_API_internal" {
     }
 
     port {
+      name="ltcapi"
       port = 8000
       target_port = 8000
     }
-
-    type = "ClusterIP"
   }
 
 }
